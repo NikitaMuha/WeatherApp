@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(153 204 255);
+    gap: 5px;
+    height: 10vh;
+    width: auto;
+
+
+    &__logo {
+        padding-left: 30px;
+    }
+
+    &__navigation {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    &__links_group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        margin-left: 35px;
+    }
+
+    &__select_group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__link{
+        font-size: 16px;
+    }
+
+    &__location-button {
+        margin: 0 15px;
+    }
+}

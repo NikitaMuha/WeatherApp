@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="wrapper">
+    @if((forecastCity$ | async)?.length) {
+        <div *ngFor="let city of forecastCity$ | async" class="wrapper__card">
+            <app-card
+            (click)="dataTransfer(city.location.name)"
+            (favoriteEvent)="updateFavoriteCities()"
+            [locationWeather]="city.location"
+            [displayWeather]="city.current"
+            [isFavorite]="favCheck(city.location.name)"
+            class="card"
+            ></app-card>
+        </div>
+    }
+    @else {
+        <h3>No favorite places yet</h3>
+    }
+
+</div>

@@ -1,0 +1,22 @@
+<div class="search-container">
+    <img [ngClass]="locationIconClassList" src="https://img.icons8.com/?size=100&id=15890&format=png&color=000000" alt="Pointer icon">
+    <form id="search-form" (submit)="forecastSearch($event)">
+        <div class="ng-autocomplete">
+        <ng-autocomplete 
+        id="searchInput" 
+        (inputFocused)="inputFocused()"  
+        (inputChanged)="autocompleteTrack($event)" 
+        (selected)="forecastSearch($event)"
+        [data]="autocompleteArray" 
+        searchKeyword='name'
+        [itemTemplate]="itemTemplate" 
+        placeholder="Enter location"
+        >
+    </ng-autocomplete>
+    <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.name"></a>
+    </ng-template>
+</div>
+</form>
+<button type="button" (submit)="forecastSearch($event)">🔎</button>
+</div>

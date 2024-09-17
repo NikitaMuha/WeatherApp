@@ -1,0 +1,43 @@
+    <div class="currentCard">
+      <section class="currentCard__header">
+        <h3>{{ locationWeather?.name }},&nbsp;</h3>
+        <h3>{{ locationWeather?.country }}</h3>
+      </section>
+      <svg 
+  class="currentCard__favoriteBtn"
+  (click)="handleFavorite(locationWeather?.name!)"
+  [@tadaAnimation]="animationState ? 'active' : 'inactive'"
+  [@fillAnimation]="fillState ? 'filled' : 'empty'"
+  width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clipPath">
+      <polygon points="12,2 15,8.6 22,9.3 17,14.2 18.2,21 12,17.8 5.8,21 7,14.2 2,9.3 9,8.6" />
+    </clipPath>
+  </defs>
+  <polygon 
+    points="12,2 15,8.6 22,9.3 17,14.2 18.2,21 12,17.8 5.8,21 7,14.2 2,9.3 9,8.6"
+    [attr.fill]="isFavorite ? 'orange' : 'none'"
+    stroke="orange" 
+    stroke-width="2"
+    clip-path="url(#clipPath)" />
+</svg>
+
+      <div class="weather-icon">
+        <ng-container *ngIf="displayWeather?.condition as condition">
+          <img [src]="condition.icon" width="128" height="128" alt="Weather image"/>
+        </ng-container>
+      </div>
+      <div class="currentCard__info">
+        <ng-container *ngIf="displayWeather?.condition as condition">
+          <h3>{{ condition.text }}</h3>
+        </ng-container>
+        <h5>Humidity&nbsp;{{ displayWeather?.humidity }}%</h5>
+        @if(isCelsius) {
+          <h2>{{ displayWeather?.temp_c }}°C</h2>
+          <h5>Feels like {{ displayWeather?.feelslike_c }}°C</h5>
+        } @else {
+          <h2>{{ displayWeather?.temp_f}}°F</h2>
+          <h5>Feels like {{ displayWeather?.feelslike_f }}°F</h5>
+        }
+      </div>
+    </div>

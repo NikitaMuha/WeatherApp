@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; 
+    gap: 16px; 
+    padding-top: 10px;
+
+    &__card {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+} 

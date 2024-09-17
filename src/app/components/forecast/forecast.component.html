@@ -1,0 +1,128 @@
+<div class="wrapper">
+    @if(displayCurrent) {
+      <app-card 
+      [locationWeather]="locationWeather" 
+      [displayWeather]="displayWeather" 
+      [isFavorite]="isFavorite"
+      (favoriteEvent)="handleEvent($event)"
+      >
+      </app-card>
+    }
+
+    @if(displayForecast) {
+      <ng-container 
+      *ngTemplateOutlet="forecastCard; context: { hour: selectedHour }"
+      >
+      </ng-container>
+    }
+
+    @if(displayNoLocation) {
+      <ng-container
+      *ngTemplateOutlet="noLocation"
+      ></ng-container>
+    }
+
+    <ng-template #forecastCard let-hour="hour">
+      <div class="forecastCard">
+        <section class="forecastCard__header">
+          <h3>{{ locationWeather?.name }},&nbsp;</h3>
+          <h3>{{ locationWeather?.country }}</h3>
+        </section>
+        <div class="forecastCard__info">
+        <ng-container *ngIf="hour.condition.icon as icon">
+          <img [src]="icon" width="128" height="128"
+          />
+        </ng-container>
+        @if(isCelsius) {
+          <h2>{{ hour.temp_c }}°C</h2>
+        } @else {
+          <h2>{{ hour.temp_f}}°F</h2>
+        }
+        <h3>{{ hour.time }}</h3>
+        <h5 *ngIf="hour.chance_of_rain > 0">Probability of rain {{ hour.chance_of_rain }}%</h5>
+        <h5 *ngIf="hour.chance_of_snow > 0">Probability of snow {{ hour.chance_of_snow }}%</h5>
+      </div>
+      </div>
+    </ng-template>
+
+    <ng-template #noLocation>
+      <h2>Search for your place of interest!</h2>
+    </ng-template>
+
+
+    @if(displayCurrent || displayForecast) {  
+    <cdk-accordion class="accordion">
+      @for (day of forecastWeather?.forecastday; track day; let index = $index) {
+      <cdk-accordion-item
+        #accordionItem="cdkAccordionItem"
+        class="accordion__item"
+        role="button"
+        tabindex="0"
+        [attr.id]="'accordion-header-' + index"
+        [attr.aria-expanded]="accordionItem.expanded"
+        [attr.aria-controls]="'accordion-body-' + index"
+      >
+        <div class="accordion__header" (click)="accordionItem.toggle()">
+          <ng-container *ngIf="day.day.condition.icon as icon">
+            <img
+              class="accordion__weather-icon-image"
+              [src]="icon"
+              width="32"
+              height="32"
+            />
+          </ng-container>
+          <p>{{ day.date | date }}</p>
+          <p>{{ day.day.condition.text }}</p>
+          @if(isCelsius) {
+            <p>Min Temp {{ day.day.mintemp_c }}</p>
+            <p>Max Temp {{ day.day.maxtemp_c }}</p>
+          } @else {
+            <p>Min Temp {{ day.day.mintemp_f }}</p>
+            <p>Max Temp {{ day.day.maxtemp_f }}</p>
+          }
+          <p>Rain chance {{ day.day.daily_chance_of_rain }}%</p>
+          <p>Snow chance {{ day.day.daily_chance_of_snow }}%</p>
+  
+          <span class="accordion__description">
+            Click to {{ accordionItem.expanded ? "close" : "open" }}
+          </span>
+        </div>
+        <div
+          class="accordion__body"
+          role="region"
+          [style.display]="accordionItem.expanded ? '' : 'none'"
+          [attr.id]="'accordion-body-' + index"
+          [attr.aria-labelledby]="'accordion-header-' + index"
+        >
+        <div class="accordion__hour-container">
+          <div
+            class="accordion__hour"
+            *ngFor="let hour of day.hour"
+            (click)="selectHour(hour)"
+          >
+            <p>{{ hour.time | date : "HH:mm" }}</p>
+            <div class="accordion__hour-weather-icon">
+              <ng-container *ngIf="hour.condition.icon as icon">
+                <img
+                  class="accordion__hour-weather-icon-image"
+                  [src]="icon"
+                  width="32"
+                  height="32"
+                />
+              </ng-container>
+            </div>
+            @if(isCelsius) {
+              <p>{{ hour.temp_c }}°C</p>
+            } @else {
+              <p>{{ hour.temp_f }}°F</p>
+            }
+            <p class="accordion__hour-rain-chance">{{ hour.chance_of_rain }}%</p>
+            <p class="accordion__hour-rain-chance">{{ hour.chance_of_snow }}%</p>
+          </div>
+        </div>
+        </div>
+      </cdk-accordion-item>
+      }
+    </cdk-accordion>
+    }
+  </div>

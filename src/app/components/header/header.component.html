@@ -1,0 +1,24 @@
+<header class="header">
+    <a routerLink="/weather">
+        <img width="50" height="50" class="header__logo" src="https://img.icons8.com/?size=100&id=60jNlf0wNMdq&format=png&color=000000" alt="sorting-arrows-horizontal--v2"/>
+    </a>
+    <nav class="header__navigation">
+        <section class="header__links_group">
+            <a mat-button routerLink="/weather" class="header__link">Weather</a>
+            <a mat-button routerLink="/favorite" class="header__link">Favorite</a>
+        </section> 
+        <section class="header__select_group">
+            <form [formGroup]="temperature">
+                <mat-button-toggle-group 
+                formControlName="tempControl"
+                aria-label="Temperature Format"
+                (change)="onControlChange($event.value)"
+                >
+                  <mat-button-toggle value="Celsius">Celsius</mat-button-toggle>
+                  <mat-button-toggle value="Fahrenheit">Fahrenheit</mat-button-toggle>
+                </mat-button-toggle-group>        
+            </form>
+            <button mat-button class="header__location-button" (click)="defineLocation()">Get forecast by location</button>
+        </section>
+    </nav>
+</header>

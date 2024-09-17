@@ -1,0 +1,107 @@
+.search-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 10vh;
+    padding-left: 2%;
+
+
+& input:focus::placeholder {
+    opacity: .3;
+  }
+}
+
+  .search-container button {
+    box-sizing: border-box;
+    align-self: center;
+    margin-top: 10px;
+    border-radius: 100px;
+    border: transparent 1.5px solid;
+    padding: 7px 9px 7px 9px;
+    background-color: transparent;
+    transition: background-color .2s ease-in-out;
+  
+  &:hover {
+    background-color: #1d28357a;
+  }
+}
+
+
+
+.location-icon {
+    box-sizing: border-box;
+    pointer-events: none;
+    align-self: center;
+    margin-top: 10px;
+    height: 30px;
+    transition: .4s ease-in-out;
+  }
+  .location-icon-focus{
+    box-sizing: border-box;
+    align-self: center;
+    margin-top: 10px;
+    pointer-events: none;
+    height: 30px;
+    width: auto;
+    transform:  rotate(90deg);
+    transition: .4s ease-in-out;
+  }
+  .location-icon-active{
+    box-sizing: border-box;
+    align-self: center;
+    margin-top: 10px;
+    pointer-events: none;
+    height: 30px;
+    width: auto;
+    transform:  rotate(135deg);
+    transition: transform .4s ease-in-out;
+  }
+
+
+  .ng-autocomplete {
+    box-sizing: border-box;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    font-size: 15px;
+    height: auto;
+    width: 150px;
+    border-radius: 15px;
+    border: transparent solid 1.5px;
+    background-color: white;
+
+    
+    
+  }
+  
+  .ng-autocomplete ::ng-deep .autocomplete-container {
+    box-sizing: border-box;
+    box-shadow: none;
+    align-self: center;
+    width: 150px;
+  }
+  
+  .ng-autocomplete ::ng-deep .autocomplete-container input {
+    box-sizing: border-box;
+    align-self: center;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    font-size: 15px;
+    height: 35px;
+    width: 110px;
+    border-radius: 15px;
+    border: transparent solid 1.5px;
+    background-color: #fff;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .ng-autocomplete ::ng-deep .autocomplete-container input:focus::placeholder{
+    opacity: .3;
+  }
+  
+  .ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .not-found {
+    display: none !important;
+  }
+
+  .ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .input-container ::ng-deep .x {
+    top: 45%;
+  }
